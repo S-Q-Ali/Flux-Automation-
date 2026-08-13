@@ -239,8 +239,4 @@ class MoviePipeline:
             self.history.record("pipeline_done", scenes_done=len(done), final=str(final))
             self.on_finished(self._summary)
         finally:
-            if self._driver is not None:
-                try:
-                    self._driver.quit()
-                except Exception:
-                    pass
+            self._driver = None
