@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+chrome-profile/
+session.json
+settings.json
+pipeline_state.json
+prompts.txt
+output/
+recon/
+assets/
