@@ -60,11 +60,6 @@ def ensure_authenticated(driver, settings, email=None, password=None, cookie_str
     if browser.wait_for(driver, 8, lambda: on_dashboard(driver)):
         return True
 
-    if session_store.load_session(driver, settings):
-        driver.get(settings["playground_url"])
-        if browser.wait_for(driver, 12, lambda: on_dashboard(driver)):
-            return True
-
     if cookie_string:
         from . import profiles
 
@@ -76,6 +71,11 @@ def ensure_authenticated(driver, settings, email=None, password=None, cookie_str
             log("Session established from profile cookies")
             return True
         log("Profile cookies did not establish a session.")
+
+    if session_store.load_session(driver, settings):
+        driver.get(settings["playground_url"])
+        if browser.wait_for(driver, 12, lambda: on_dashboard(driver)):
+            return True
 
     if not email or not password:
         return False
